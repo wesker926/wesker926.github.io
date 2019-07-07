@@ -160,6 +160,7 @@
   </style>
 </noscript>
 
+  <script type="text/javascript" src="/js/my-config.js"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -1039,26 +1040,26 @@
   
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":90,"vOffset":140},"mobile":{"show":false},"log":false});</script></body>
-</html>
 
 <script type="text/javascript">
-function () {
-  var my_oldonload = window.onload;
-  var my_func = function () {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf("mobile") !== -1) {
-      // 手机
-      document.getElementById("cloudmusic").style.display = "none";
-      document.getElementById("c_n4").style.display = "none";
-    }
-  };
-  if (typeof window.onload != 'function') {
-    window.onload = my_func;
-  } else {
-    window.onload = function () {
-      my_oldonload();
-      my_func();
-    };
+console.log(1);
+var my_oldonload = window.onload;
+var my_func = function () {
+  var ua = navigator.userAgent.toLowerCase();
+  console.log(ua);
+  if (ua.indexOf("mobile") !== -1) {
+    // 手机
+    document.getElementById("cloudmusic").style.display = "none";
+    document.getElementById("c_n5").style.display = "none";
   }
-}();
+};
+if (typeof window.onload != 'function') {
+  window.onload = my_func;
+} else {
+  window.onload = function () {
+    my_oldonload();
+    my_func();
+  };
+}
 </script>
+</html>

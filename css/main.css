@@ -1809,7 +1809,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b92020;
+  background: #e301ff;
 }
 .feed-link,
 .chat {
@@ -2499,6 +2499,9 @@ hr {
 }
 .use-motion .logo-line-after i {
   right: -100%;
+}
+.site-subtitle {
+  display: none;
 }
 .site-brand-wrapper {
   flex-shrink: 0;

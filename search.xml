@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[秋招复习知识梳理：索引]]></title>
+    <url>%2F2019%2F07%2F07%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%2F</url>
+    <content type="text"><![CDATA[秋招复习知识点索引，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B树，B+树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP协议栈，OSI七层模型 HTTP，HTTPS DNS TCP，UDP IP，IPV6 ARP BIO，NIO，AIO Socks5 数据库 数据库索引 SQL语法 引擎对比 数据库锁 事务 优化 MySQL Redis 操作系统 进程，线程，进程通讯，线程通讯 OS策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 实例问题 123456789 987654321]]></content>
+      <categories>
+        <category>复习</category>
+        <category>秋招</category>
+      </categories>
+      <tags>
+        <tag>复习</tag>
+        <tag>秋招</tag>
+        <tag>临阵磨枪</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F07%2F07%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>

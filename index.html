@@ -385,7 +385,7 @@
                 
               
 
-              <time title="创建时间：2019-07-08 20:11:23 / 修改时间：23:09:28" itemprop="dateCreated datePublished" datetime="2019-07-08T20:11:23+08:00">2019-07-08</time>
+              <time title="创建时间：2019-07-08 20:11:23 / 修改时间：23:58:11" itemprop="dateCreated datePublished" datetime="2019-07-08T20:11:23+08:00">2019-07-08</time>
             </span>
           
 
@@ -452,7 +452,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">6.4k</span>
+              <span title="本文字数">6.1k</span>
             </span>
           
 
@@ -1095,7 +1095,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">8k</span>
+    <span title="站点总字数">7k</span>
   
 
   
@@ -1277,7 +1277,12 @@ var my_func = function () {
   if (ua.indexOf("mobile") !== -1) {
     // 手机
     document.getElementById("cloudmusic").style.display = "none";
-    document.getElementById("c_n5").style.display = "none";
+    var es = document.getElementsByTagName("canvas");
+    for(var i = 0;i < es.length;i++) {
+      if (es[i].id.indexOf("c_n") != -1) {
+        es[i].style.display = "none";
+      }
+    }
   }
 };
 if (typeof window.onload != 'function') {

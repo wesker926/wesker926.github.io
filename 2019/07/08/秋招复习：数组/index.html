@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="wesker926&#39;s notes">
 <meta property="og:description" content="数组是由相同类型的元素组成的数据结构，分配一块连续的内存来存储，利用元素下标索引来计算对应的储存地址，几乎所有语言都支持数组。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-08T15:09:28.356Z">
+<meta property="og:updated_time" content="2019-07-08T15:58:11.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习：数组">
 <meta name="twitter:description" content="数组是由相同类型的元素组成的数据结构，分配一块连续的内存来存储，利用元素下标索引来计算对应的储存地址，几乎所有语言都支持数组。">
@@ -384,7 +384,7 @@
                 
               
 
-              <time title="创建时间：2019-07-08 20:11:23 / 修改时间：23:09:28" itemprop="dateCreated datePublished" datetime="2019-07-08T20:11:23+08:00">2019-07-08</time>
+              <time title="创建时间：2019-07-08 20:11:23 / 修改时间：23:58:11" itemprop="dateCreated datePublished" datetime="2019-07-08T20:11:23+08:00">2019-07-08</time>
             </span>
           
 
@@ -451,7 +451,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">6.4k</span>
+              <span title="本文字数">6.1k</span>
             </span>
           
 
@@ -488,15 +488,14 @@
 <p>但数组是一种特殊的类型，没有 class 文件，API 中没有对应的类，它是由 JVM 从元素类型合成出来的。</p>
 <p>length 属性，在 JVM 中通过 arraylength 专用字节码指令访问。</p>
 <h2 id="数组的父类"><a href="#数组的父类" class="headerlink" title="数组的父类"></a>数组的父类</h2><p>所用数组类型继承自 Object，同时，如果 B 继承自 A，则 B 的数组类型继承自 A 的数组类型。</p>
-<p>这一点和容器不同，比如，ArrayList<number> 与 ArrayList<integer> 没有继承关系。</integer></number></p>
+<p>这一点和容器不同，比如，ArrayList&lt;Number&gt; 与 ArrayList&lt;Integer&gt; 没有继承关系。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer[] a = <span class="keyword">new</span> Integer[<span class="number">1</span>];</span><br><span class="line">        System.out.println(a.getClass().getSuperclass().getName());</span><br><span class="line">        System.out.println(a <span class="keyword">instanceof</span> Integer[]);</span><br><span class="line">        System.out.println(a <span class="keyword">instanceof</span> Number[]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output --&gt;</span><br><span class="line">java.lang.Object</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
 
 <p>Java 类仅允许有一个父类，但是 getSuperclass 方法却返回了 Object，这是因为：</p>
 <blockquote>
 <p>JDK1.8 Java API</p>
-<p>public Type getGenericSuperclass()</p>
-<p>Returns the Type representing the direct superclass of the entity (class, interface, primitive type or void) represented by this Class.</p>
-<p>If the superclass is a parameterized type, the Type object returned must accurately reflect the actual type parameters used in the source code. The parameterized type representing the superclass is created if it had not been created before. See the declaration of ParameterizedType for the semantics of the creation process for parameterized types. If this Class represents either the Object class, an interface, a primitive type, or void, then null is returned. If this object represents an array class then the Class object representing the Object class is returned.</p>
+<p>public Class&lt;? super T&gt; getSuperclass()</p>
+<p>Returns the Class representing the superclass of the entity (class, interface, primitive type or void) represented by this Class. If this Class represents either the Object class, an interface, a primitive type, or void, then null is returned. If this object represents an array class then the Class object representing the Object class is returned.</p>
 </blockquote>
 <p>如果对象是数组类型，该方法将返回 Object 对应的 Class 对象。</p>
 <h2 id="数组类型全名"><a href="#数组类型全名" class="headerlink" title="数组类型全名"></a>数组类型全名</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">boolean</span>[].class.getName(), <span class="keyword">boolean</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">byte</span>[].class.getName(), <span class="keyword">byte</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">char</span>[].class.getName(), <span class="keyword">char</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">short</span>[].class.getName(), <span class="keyword">short</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">int</span>[].class.getName(), <span class="keyword">int</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">long</span>[].class.getName(), <span class="keyword">long</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">float</span>[].class.getName(), <span class="keyword">float</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">double</span>[].class.getName(), <span class="keyword">double</span>[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, String[].class.getName(), String[].class.getCanonicalName());</span><br><span class="line">        System.out.printf(<span class="string">"%-20s%30s\n"</span>, <span class="keyword">int</span>[][][].class.getName(), <span class="keyword">int</span>[][][].class.getCanonicalName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output --&gt;</span><br><span class="line">[Z                                       <span class="keyword">boolean</span>[]</span><br><span class="line">[B                                          <span class="keyword">byte</span>[]</span><br><span class="line">[C                                          <span class="keyword">char</span>[]</span><br><span class="line">[S                                         <span class="keyword">short</span>[]</span><br><span class="line">[I                                           <span class="keyword">int</span>[]</span><br><span class="line">[J                                          <span class="keyword">long</span>[]</span><br><span class="line">[F                                         <span class="keyword">float</span>[]</span><br><span class="line">[D                                        <span class="keyword">double</span>[]</span><br><span class="line">[Ljava.lang.String;             java.lang.String[]</span><br><span class="line">[[[I                                     <span class="keyword">int</span>[][][]</span><br></pre></td></tr></table></figure>
@@ -871,7 +870,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">8k</span>
+    <span title="站点总字数">7k</span>
   
 
   
@@ -1059,7 +1058,12 @@ var my_func = function () {
   if (ua.indexOf("mobile") !== -1) {
     // 手机
     document.getElementById("cloudmusic").style.display = "none";
-    document.getElementById("c_n5").style.display = "none";
+    var es = document.getElementsByTagName("canvas");
+    for(var i = 0;i < es.length;i++) {
+      if (es[i].id.indexOf("c_n") != -1) {
+        es[i].style.display = "none";
+      }
+    }
   }
 };
 if (typeof window.onload != 'function') {

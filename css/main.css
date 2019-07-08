@@ -1809,7 +1809,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #42ff42;
+  background: #ff6cff;
 }
 .feed-link,
 .chat {
@@ -2752,4 +2752,14 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+.post-body p a,
+.post-body ol a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover,
+.post-body ol a:hover {
+  color: #0477ab;
+  text-decoration: underline;
 }

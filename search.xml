@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[秋招复习：数据库 事务]]></title>
+    <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BA%8B%E5%8A%A1%2F</url>
+    <content type="text"><![CDATA[在数据库系统中，一个事务（transaction）是指，由一系列数据库操作组成的一个完整的逻辑过程。它是并发控制的基本单位，其操作要么全部执行，要么全部不执行，是一个不可分割的工作单位。 复习索引 执行流程 ACID特性为了保证事务的可靠，DBMS 必须具备四个特性，即 ACID。 原子性（Atomicity）：一个事务的所有操作，要么全部完成，要么全部不完成，如果成功则提交，如果失败则回滚。即事务不可分割，不可约简； 一致性（Consistency）：事务的执行需要确保数据库从一个一致状态转变为另一个一致状态，一致性的含义是数据库中的数据满足完整性约束。即事务开启前和结束后，数据库的完整性不能被破坏，写入的资料必须完全符合所有的预设约束，触发器，级联回滚等； 隔离性（Isolation）：数据库允许多个并发事务同时对数据进行读写与修改，隔离性可以防止多个事务并发执行时由于交叉执行而导致的数据不一致。隔离具有不同的级别，参照隔离级别； 持久性（Durability）：事务处理结束之后，对数据的修改需要是永久的。 并发问题并发执行事务会产生一些问题，参考并发控制机制。 参考 秋招完再补。]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>数据结构</tag>
+        <tag>事务</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[秋招复习：ping]]></title>
     <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9Aping%2F</url>
     <content type="text"><![CDATA[ping 是最著名的ICMP应用，主要用来探测主机到主机之间是否可以通信。 ping 使用了 ICMP 类型8 Echo Request（回显请求）和类型0 Echo Reply（回显响应）作为探测与应答的报文。 复习索引 ICMP ping 过程 ping应用 会构建一个固定格式的 ICMP 请求数据包； Linux 下除了8字节报头，会填充报文至总大小64字节； Windows下除8字节报头，会填充报文至总大小40字节。 数据包与目标 IP 交给 IP 协议封装； 根据目标 IP，由 ARP 协议获取目标的 MAC 地址； 同网段，可查询到目标 MAC并发送； 异网段，此请求被发给网关，由网关转发（ARP 解析流程）。 目标受到 Echo 请求报文，返回 Echo 应答报文； 本地收到应答（或无应答失败），根据时间与成功响应次数估算出丢包率与数据往返时延（RTT）。 参考 秋招完再补。]]></content>
@@ -35,9 +53,9 @@
       <tags>
         <tag>秋招</tag>
         <tag>复习</tag>
+        <tag>临阵磨枪</tag>
         <tag>ICMP</tag>
         <tag>互联网控制消息协议</tag>
-        <tag>临阵磨枪</tag>
       </tags>
   </entry>
   <entry>
@@ -55,12 +73,12 @@
       <tags>
         <tag>秋招</tag>
         <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重写</tag>
-        <tag>Override</tag>
         <tag>重载</tag>
+        <tag>Override</tag>
         <tag>Overload</tag>
+        <tag>临阵磨枪</tag>
       </tags>
   </entry>
   <entry>
@@ -78,10 +96,10 @@
       <tags>
         <tag>秋招</tag>
         <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重载</tag>
         <tag>Overload</tag>
+        <tag>临阵磨枪</tag>
       </tags>
   </entry>
   <entry>
@@ -99,11 +117,11 @@
       <tags>
         <tag>秋招</tag>
         <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重写</tag>
-        <tag>覆写</tag>
         <tag>Override</tag>
+        <tag>临阵磨枪</tag>
+        <tag>覆写</tag>
       </tags>
   </entry>
   <entry>
@@ -127,7 +145,7 @@
   <entry>
     <title><![CDATA[秋招复习：内容索引]]></title>
     <url>%2F2019%2F07%2F07%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B4%A2%E5%BC%95%2F</url>
-    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务 ACID特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
+    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>

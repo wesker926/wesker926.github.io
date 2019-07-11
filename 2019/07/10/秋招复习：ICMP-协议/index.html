@@ -102,10 +102,12 @@
 <meta property="og:site_name" content="wesker926&#39;s notes">
 <meta property="og:description" content="ICMP，互联网控制消息（报文）协议，位于网络层，用于在网际协议中发送控制消息。 ICMP 依靠 IP 来完成任务，根据 IP 的版本不同，也分为 v4 和 v6 版本。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-11T13:23:10.769Z">
+<meta property="og:image" content="http://www.wesker926.com/2019/07/10/秋招复习：ICMP-协议/%E6%8A%A5%E5%A4%B4.jpg">
+<meta property="og:updated_time" content="2019-07-11T13:42:14.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招复习：ICMP 协议">
 <meta name="twitter:description" content="ICMP，互联网控制消息（报文）协议，位于网络层，用于在网际协议中发送控制消息。 ICMP 依靠 IP 来完成任务，根据 IP 的版本不同，也分为 v4 和 v6 版本。">
+<meta name="twitter:image" content="http://www.wesker926.com/2019/07/10/秋招复习：ICMP-协议/%E6%8A%A5%E5%A4%B4.jpg">
 
 
 
@@ -428,7 +430,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-11 21:23:10" itemprop="dateModified" datetime="2019-07-11T21:23:10+08:00">2019-07-11</time>
+                <time title="修改时间：2019-07-11 21:42:14" itemprop="dateModified" datetime="2019-07-11T21:42:14+08:00">2019-07-11</time>
               </span>
             
           
@@ -504,7 +506,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span title="本文字数">158</span>
+              <span title="本文字数">517</span>
             </span>
           
 
@@ -545,7 +547,26 @@
 <li>traceroute</li>
 </ol>
 <p><a href="/2019/07/07/秋招复习：内容索引/">复习索引</a></p>
-<h1 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h1><p>to be continued…</p>
+<h1 id="报文结构"><a href="#报文结构" class="headerlink" title="报文结构"></a>报文结构</h1><p>ICMP 包含在 IP 数据包中，因此 IP 报头在 ICMP 报头的前面（IP 首部一般20字节）。</p>
+<p><img src="//www.wesker926.com/2019/07/10/秋招复习：ICMP-协议/%E6%8A%A5%E5%A4%B4.jpg" alt="报头"></p>
+<p>ICMP 报头为8字节，当 IP 首部中协议字段为1时，说明是个 ICMP 报文。</p>
+<p>其中，类型和代码（各1字节）共同定义了  ICMP 报文的详细类型。</p>
+<p>标识符标识了本 ICMP 进程，仅适用于 Echo Reply报文使用。</p>
+<p>序列号也是在 Echo Reply报文中使用。</p>
+<p>主要类型：</p>
+<ol>
+<li>类型 0：Echo Reply（回显响应）；</li>
+<li>类型 8：Echo Request（回显请求）；</li>
+<li>类型 13：时间戳请求；</li>
+<li>类型 14：时间戳应答；</li>
+<li>类型 3：目标不可达；</li>
+<li>类型 4：源端关闭；</li>
+<li>类型 11：超时。</li>
+</ol>
+<h1 id="填充内容"><a href="#填充内容" class="headerlink" title="填充内容"></a>填充内容</h1><ol>
+<li>Linux ping 工具一般填充使得总报文大小为64字节；</li>
+<li>Windows ping 工具一般填充使得总报文大小为40字节。</li>
+</ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><blockquote>
 <p>秋招完再补。</p>
 </blockquote>
@@ -679,7 +700,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -720,7 +741,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -767,7 +790,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -831,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#报文结构"><span class="nav-number">1.</span> <span class="nav-text">报文结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#报文结构"><span class="nav-number">1.</span> <span class="nav-text">报文结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#填充内容"><span class="nav-number">2.</span> <span class="nav-text">填充内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -867,7 +894,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">13k</span>
   
 
   
@@ -876,7 +903,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">12 分钟</span>
   
 </div>
 

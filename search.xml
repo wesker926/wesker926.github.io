@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[秋招复习：UDP]]></title>
+    <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AUDP%2F</url>
+    <content type="text"><![CDATA[用户数据报协议（UDP）工作于传输层，是一个简单的面向数据报的通信协议。 UDP 仅在 IP协议上增加了简单功能，即多路复用与分解，差错校验等。 复习索引 主要特点 无连接； 尽力而为的交付； 面向报文； UDP 仅把上层报文加首部交付给 IP，本身并不会合并拆分，这就需要应用选择合适的报文大小，否则会降低效率。 没有拥塞控制； 支持一对一，一对多，多对多； 首部仅8字节。 主要优点 快； 简单； 没有连接开销； 报文的首部开销小。 报文结构 校验和校验和可以用于发现头部信息和数据中的传输错误。 在IPv4中是可选的，在IPv6中则是强制的。如果不使用校验和，该字段应被填充为全0。 UDP 校验和有16位，使用方式： 发送方对所有16比特字求和（溢出需要回卷），再取反码，作为校验和； 接收方对所有16比特字求和，二进制结果应为全1（原码加反码），以此来判断是否正确。 校验和计算时包括整个报文段（不含自身）以及伪首部，若为奇数个字节，则补充一个全零字节。 参考 秋招完再补。]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>计算机网络</category>
+        <category>协议栈</category>
+        <category>传输层</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>UDP</tag>
+        <tag>用户数据报协议</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[秋招复习：数据库 事务]]></title>
     <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BA%8B%E5%8A%A1%2F</url>
     <content type="text"><![CDATA[在数据库系统中，一个事务（transaction）是指，由一系列数据库操作组成的一个完整的逻辑过程。它是并发控制的基本单位，其操作要么全部执行，要么全部不执行，是一个不可分割的工作单位。 复习索引 执行流程 ACID特性为了保证事务的可靠，DBMS 必须具备四个特性，即 ACID。 原子性（Atomicity）：一个事务的所有操作，要么全部完成，要么全部不完成，如果成功则提交，如果失败则回滚。即事务不可分割，不可约简； 一致性（Consistency）：事务的执行需要确保数据库从一个一致状态转变为另一个一致状态，一致性的含义是数据库中的数据满足完整性约束。即事务开启前和结束后，数据库的完整性不能被破坏，写入的资料必须完全符合所有的预设约束，触发器，级联回滚等； 隔离性（Isolation）：数据库允许多个并发事务同时对数据进行读写与修改，隔离性可以防止多个事务并发执行时由于交叉执行而导致的数据不一致。隔离具有不同的级别，参照隔离级别； 持久性（Durability）：事务处理结束之后，对数据的修改需要是永久的。 并发问题并发执行事务会产生一些问题，参考并发控制机制。 参考 秋招完再补。]]></content>
@@ -41,7 +61,7 @@
   <entry>
     <title><![CDATA[秋招复习：ICMP 协议]]></title>
     <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AICMP-%E5%8D%8F%E8%AE%AE%2F</url>
-    <content type="text"><![CDATA[ICMP，互联网控制消息（报文）协议，位于网络层，用于在网际协议中发送控制消息。 ICMP 依靠 IP 来完成任务，根据 IP 的版本不同，也分为 v4 和 v6 版本。 ICMP 协议的著名应用是： ping traceroute 复习索引 报文结构to be continued… 参考 秋招完再补。]]></content>
+    <content type="text"><![CDATA[ICMP，互联网控制消息（报文）协议，位于网络层，用于在网际协议中发送控制消息。 ICMP 依靠 IP 来完成任务，根据 IP 的版本不同，也分为 v4 和 v6 版本。 ICMP 协议的著名应用是： ping traceroute 复习索引 报文结构ICMP 包含在 IP 数据包中，因此 IP 报头在 ICMP 报头的前面（IP 首部一般20字节）。 ICMP 报头为8字节，当 IP 首部中协议字段为1时，说明是个 ICMP 报文。 其中，类型和代码（各1字节）共同定义了 ICMP 报文的详细类型。 标识符标识了本 ICMP 进程，仅适用于 Echo Reply报文使用。 序列号也是在 Echo Reply报文中使用。 主要类型： 类型 0：Echo Reply（回显响应）； 类型 8：Echo Request（回显请求）； 类型 13：时间戳请求； 类型 14：时间戳应答； 类型 3：目标不可达； 类型 4：源端关闭； 类型 11：超时。 填充内容 Linux ping 工具一般填充使得总报文大小为64字节； Windows ping 工具一般填充使得总报文大小为40字节。 参考 秋招完再补。]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>
@@ -75,10 +95,10 @@
         <tag>复习</tag>
         <tag>Java</tag>
         <tag>重写</tag>
-        <tag>重载</tag>
         <tag>Override</tag>
-        <tag>Overload</tag>
         <tag>临阵磨枪</tag>
+        <tag>重载</tag>
+        <tag>Overload</tag>
       </tags>
   </entry>
   <entry>
@@ -97,9 +117,9 @@
         <tag>秋招</tag>
         <tag>复习</tag>
         <tag>Java</tag>
+        <tag>临阵磨枪</tag>
         <tag>重载</tag>
         <tag>Overload</tag>
-        <tag>临阵磨枪</tag>
       </tags>
   </entry>
   <entry>
@@ -119,9 +139,9 @@
         <tag>复习</tag>
         <tag>Java</tag>
         <tag>重写</tag>
+        <tag>覆写</tag>
         <tag>Override</tag>
         <tag>临阵磨枪</tag>
-        <tag>覆写</tag>
       </tags>
   </entry>
   <entry>
@@ -145,7 +165,7 @@
   <entry>
     <title><![CDATA[秋招复习：内容索引]]></title>
     <url>%2F2019%2F07%2F07%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B4%A2%E5%BC%95%2F</url>
-    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
+    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 多路复用与分解，端口 伪首部 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>

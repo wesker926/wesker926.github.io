@@ -1,6 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[秋招复习：剑指Offer P05 用两个栈实现队列]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P05-%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[剑指Offer P05 用两个栈实现队列 复习索引 剑指Offer 索引 题目描述用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。 思路push 和 pop 两个方法，从哪个着手都可以，我是对 push 做了处理。 当压入新元素时，压入到栈的底部即可。 可以在压入前把栈 A 的元素压入栈 B，压入后再转移回来，这样新元素就在栈底了。 代码已通过验证。 1234567891011121314151617181920import java.util.Stack;public class Solution &#123; Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;(); Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;(); public void push(int node) &#123; while (!stack1.empty()) &#123; stack2.push(stack1.pop()); &#125; stack1.push(node); while (!stack2.empty()) &#123; stack1.push(stack2.pop()); &#125; &#125; public int pop() &#123; return stack1.pop(); &#125;&#125;]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+        <category>剑指Offer</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秋招复习：剑指Offer P04 重建二叉树]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P04-%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[剑指Offer P04 重建二叉树 复习索引 剑指Offer 索引 题目描述输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。 思路讲到 DFS 十有八九就递归。 考虑先序遍历特点，先是根节点值，再是左子树部分，再是右子树部分； 考虑中序遍历特点，先是左子树部分，再是根节点值，再是右子树部分； 再加上题目提示，不存在重复值。 那么基本过程就出来了，根据先序的第一个值，在中序里找，中序能分割出来左右子树的部分（以及长度），再根据长度去先序里分割。把左右子树各个部分传进方法里递归处理。 代码已通过验证。 1234567891011121314151617181920212223242526272829303132333435363738394041/** * Definition for binary tree * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */public class Solution &#123; public TreeNode reConstructBinaryTree(int [] pre,int [] in) &#123; if (null == pre || null == in || pre.length != in.length) &#123; return null; &#125; return helper(pre, 0, pre.length - 1, in, 0, in.length - 1); &#125; private TreeNode helper(int[] pre, int ps, int pe, int[] in, int is, int ie) &#123; if (ps &gt; pe) &#123; return null; &#125; TreeNode node = new TreeNode(pre[ps]); if (ps == pe) &#123; return node; &#125; int index = -1; for (int i = is; i &lt;= ie; i++) &#123; if (in[i] == pre[ps]) &#123; index = i; break; &#125; &#125; if (index &lt; 0) &#123; return node; &#125; int len = index - is; node.left = helper(pre, ps + 1, ps + len, in, is, index - 1); node.right = helper(pre, ps + len + 1, pe, in, index + 1, ie); return node; &#125;&#125;]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+        <category>剑指Offer</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秋招复习：剑指Offer P03 从尾到头打印链表]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P03-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[剑指Offer P03 从尾到头打印链表 复习索引 剑指Offer 索引 题目描述输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。 思路其实就是要求头插入，但是题目很坏的要求返回 ArrayList。 ArrayList 基于数组实现，头插开销很大，所以考虑使用辅助容器。 这个形式明显是栈比较好，先入后出，所以可以用栈结构。 这里我用了 LinkedList。 代码已通过验证。 123456789101112131415161718192021222324252627import java.util.ArrayList;import java.util.LinkedList;/*** public class ListNode &#123;* int val;* ListNode next = null;** ListNode(int val) &#123;* this.val = val;* &#125;* &#125;**/import java.util.ArrayList;public class Solution &#123; public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) &#123; LinkedList&lt;Integer&gt; temp = new LinkedList&lt;&gt;(); while (null != listNode) &#123; temp.push(listNode.val); listNode = listNode.next; &#125; ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(temp.size()); list.addAll(temp); return list; &#125;&#125;]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+        <category>剑指Offer</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秋招复习：剑指Offer P02 替换空格]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P02-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%2F</url>
+    <content type="text"><![CDATA[剑指Offer P02 替换空格 复习索引 剑指Offer 索引 题目描述请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。 思路不考虑 Java API 方法。 看了别人的写法，主要是第一次正序遍历查空格数，计算新的长度；第二遍后续遍历，正常字符后移即可，空格就逐字符插入目标字符串。后序插入好处是显而易见的，不像正序那样，每次插入都要把后面的后移。 但是题目也没说不能用额外空间，我就写了个简单的方法。 代码已通过验证。 12345678910111213141516public class Solution &#123; public String replaceSpace(StringBuffer str) &#123; if (null == str) &#123; return null; &#125; StringBuilder sb = new StringBuilder(str.length()); for (int i = 0; i &lt; str.length(); i++) &#123; if (' ' == str.charAt(i)) &#123; sb.append("%20"); &#125; else &#123; sb.append(str.charAt(i)); &#125; &#125; return sb.toString(); &#125;&#125;]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+        <category>剑指Offer</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秋招复习：剑指Offer P01 二维数组中的查找]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P01-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%2F</url>
+    <content type="text"><![CDATA[剑指Offer P01 二维数组中的查找 复习索引 剑指Offer 索引 题目描述在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 思路注意，它说的是每行每列都“单独”递增，不是整个二维表连起来都递增，这个是容易想歪的地方。 简单思路是直接遍历，时间 O(n * m)； 还可以用二分法，对每行二分，然后逐列找，时间 O(nlogm)； 更好的方法是通过二维上的一种剪枝。 从左下角或右上角的元素开始，这个元素能把二维表分为三个部分：比它小的；比它大的；未知的； 以左下角为例，该元素当前列上全比他小，当前行上全比他大，其余未知。 这时判断它和目标大小，目标比较小则剪去这一行，行索引上移；目标比较大则剪去这一列，列索引右移；相同则返回。 然后到了下一个元素，继续上述过程。 最差情况是找完了也没找到，走了 m + n 步，所以时间是线性的。 代码第三种方法，已通过验证。 1234567891011121314151617181920212223public class Solution &#123; public boolean Find(int target, int [][] array) &#123; if (null == array) &#123; return false; &#125; int i = array.length - 1; int j = 0; while (i &gt; -1) &#123; if (null == array[i] || j &gt;= array[i].length) &#123; i--; continue; &#125; if (array[i][j] == target) &#123; return true; &#125; else if (array[i][j] &lt; target) &#123; j++; &#125; else &#123; i--; &#125; &#125; return false; &#125;&#125;]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+        <category>剑指Offer</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[秋招复习：剑指Offer 索引]]></title>
+    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-%E7%B4%A2%E5%BC%95%2F</url>
+    <content type="text"><![CDATA[剑指Offer 编程题思路笔记索引。 复习索引 二维数组中的查找 替换空格 从尾到头打印链表 重建二叉树 用两个栈实现队列]]></content>
+      <categories>
+        <category>经历</category>
+        <category>秋招</category>
+        <category>复习</category>
+        <category>其他</category>
+        <category>牛客</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>复习</tag>
+        <tag>临阵磨枪</tag>
+        <tag>剑指Offer</tag>
+        <tag>编程题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[秋招复习：UDP]]></title>
     <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AUDP%2F</url>
     <content type="text"><![CDATA[用户数据报协议（UDP）工作于传输层，是一个简单的面向数据报的通信协议。 UDP 仅在 IP协议上增加了简单功能，即多路复用与分解，差错校验等。 复习索引 主要特点 无连接； 尽力而为的交付； 面向报文； UDP 仅把上层报文加首部交付给 IP，本身并不会合并拆分，这就需要应用选择合适的报文大小，否则会降低效率。 没有拥塞控制； 支持一对一，一对多，多对多； 首部仅8字节。 主要优点 快； 简单； 没有连接开销； 报文的首部开销小。 报文结构 校验和校验和可以用于发现头部信息和数据中的传输错误。 在IPv4中是可选的，在IPv6中则是强制的。如果不使用校验和，该字段应被填充为全0。 UDP 校验和有16位，使用方式： 发送方对所有16比特字求和（溢出需要回卷），再取反码，作为校验和； 接收方对所有16比特字求和，二进制结果应为全1（原码加反码），以此来判断是否正确。 校验和计算时包括整个报文段（不含自身）以及伪首部，若为奇数个字节，则补充一个全零字节。 参考 秋招完再补。]]></content>
@@ -165,7 +284,7 @@
   <entry>
     <title><![CDATA[秋招复习：内容索引]]></title>
     <url>%2F2019%2F07%2F07%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B4%A2%E5%BC%95%2F</url>
-    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 多路复用与分解，端口 伪首部 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
+    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 快排 归并 堆 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 多路复用与分解，端口 伪首部 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 剑指Offer 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>

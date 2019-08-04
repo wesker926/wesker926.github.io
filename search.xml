@@ -1,338 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[秋招复习：归并排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[归并排序也是分治法的一个典型应用，相比于快排在分割时做处理（左右两部分相对于基数），归并排序是先分割，然后在集成时有序的归并。 复习索引 描述首先让元素两两排序，这时得到若干个有序的二元组（假设是偶数个，这个不影响）； 然后让两个二元组合并，同时排序，这时得到若干个有序的四元组； 重复上述过程，直到最后得到有序的 n 元组，排序完成。 归并排序也是先天的契合递归。 时间复杂度：都是 O(nlogn)。 空间复杂度：O(n)。 稳定性：稳定。 代码递归版本： 12345678910111213141516171819202122232425262728293031323334public class MergeSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; helper(array, new int[array.length], 0, array.length - 1); &#125; public void helper(int[] array, int[] result, int s, int e) &#123; if (s == e) &#123; return; &#125; int m = (e - s) / 2 + s; int s1 = s; int e1 = m; int s2 = m + 1; int e2 = e; helper(array, result, s1, e1); helper(array, result, s2, e2); int k = s; while (s1 &lt;= e1 &amp;&amp; s2 &lt;= e2) &#123; result[k++] = array[s1] &lt; array[s2] ? array[s1++] : array[s2++]; &#125; while (s1 &lt;= e1) &#123; result[k++] = array[s1++]; &#125; while (s2 &lt;= e2) &#123; result[k++] = array[s2++]; &#125; for (int i = s; i &lt; e; i++) &#123; array[i] = result[i]; &#125; &#125;&#125;]]></content>
+    <title><![CDATA[秋招面经：字节跳动 提前批]]></title>
+    <url>%2F2019%2F08%2F04%2F%E7%A7%8B%E6%8B%9B%E9%9D%A2%E7%BB%8F%EF%BC%9A%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8-%E6%8F%90%E5%89%8D%E6%89%B9%2F</url>
+    <content type="text"><![CDATA[记录秋招字节跳动提前批面试经验（或者说是个总结）。 复习索引 基本情况意向书 get，补发面经，希望能对大家有所帮助。 本人基本情况：意向地深圳，后端研发，目前主语言Java，本硕普通985学渣，某公司实习中。 由于面试时间已经较为久远，本文就不按照轮次划分了，按照我自己梳理的顺序划分。 有的内容记不清楚了，可能有遗漏；有的内容可能没有问到，但我觉得需要复习，也写出来供大家参考。 所以实际上不算是面经了，算是个总结。 主要分享下个人经验与基础知识问题，算法题目每个面试官都问的不同，没有参考价值，唯一的建议是刷题。。。 由于每个人的情况不同，本文按照通用性排版，把最通用的放在前面。 本人很菜，懂得有限，轻喷轻喷、、、 面试注意项个人认为，下面几点是很基本的要求，不算加分项，但做不到绝对是扣分项。 守时：别迟到，最好提前十到五分钟进入面试房间（视频面），摄像头耳麦等提前一天调试好； 耐心：如果面试官有事推迟，保持耐心，不要焦躁； 礼貌：基本素养； 诚实：简历要诚实，问答要诚实，不会的问题不要强答； 保持微笑：即使身处险境，也要保持微笑； 保持谦卑：切勿狂妄。 基础知识（算法岗的同学可以关掉了） 计算机网络 从输入 URL 到页面加载完成，中间发生了什么（基本必问的问题了，因为这个问题能考察对计算机网络整体的掌握程度，以及方便面试官扩展问题）； 多进程多线程浏览器（比如 Chrome），主控进程，插件进程，GPU进程，每个 tab 一个进程，tab 进程内有网络请求线程等； 协议栈各层各说一些协议（记一下常用的）； HTTP（基本描述，Method，协议版本及新版本特点，请求响应报文结构，常用请求头字段，常见响应状态码（每类记几个），RFC规范（知道这个词儿是啥就行了）等）； 单拎出来的缓存问题，结合状态码 304 可能问到，相关头字段，If-Modified-Since 和 Last-Modified，If-None-Match 和 ETag，它们的区别等； 单拎出来的 cookie 和 session 问题，搞清楚它们是干啥的，相关的头字段，其中 session 可能扩展到分布式上； 单拎出来的跨域问题，了解下浏览器同源（协议，域名，端口）政策，对后端的限制（AJAX等，前端问题暂不考虑），解决方法（JSONP，WebSocket，CORS），CORS（Cross-Origin Resource Sharing）相关内容，头字段 Origin，Access-Control-Allow-Origin 等； HTTPS（基本描述，主要作用，和 HTTP 的区别，SSL/TLS 握手过程，为什么过程要这样设计，对称/非对称加密，公私钥，证书，签名，CA，浏览器校验，加密算法（这个我并不懂）等）； DNS（基本概念，流程，缓存，hosts 文件，DNS服务器层级，迭代/递归查询等）； SOCKS（了解下这是干啥的，以及基本流程）； 传输层（端到端通信服务，多路分解与多路复用，端口号的作用，套接字）； TCP（必问，需要清晰掌握，简单列举一下） 基本特点，报文头大小与具体结构，序号/确认号作用，控制位及各自含义，可选头的时间戳（简单了解）； 面向连接，三握四挥（记清楚），握手的 SYN 洪泛攻击，挥手的 FIN-WAIT-2 以及 TIME-WAIT 状态，两次挥手后的 TCP 半开，四次挥手后的等待，MSL 时间，time-wait 的快速回收，fin-wait-2 的设定时间； TCP 连接能否感知对方是否在线（规范不能，实际可以），TCP 保活机制（SO_KEEPALIVE），保活参数（保活定时，失活前检查参数等），应用层面保活（心跳包，ping/pong 包等））； 可靠传输，结合序号/确认号说明，停止并等待 ARQ，结合流水线/滑动窗口的连续 ARQ，超时重传机制，RTT，RTO，差错恢复机制，GBN，SR，快速重传（冗余 ARK）等； 流量控制，目的（防止接收方缓存溢出导致分组丢失），基本原理，不足及改进（匹配相差一个 RTT，接单了解一下）； 拥塞控制，目的（避免网络拥塞），基本原理，慢启动，拥塞避免，快速回复，快速重传，AIMD（加法增大乘法减小），导致网络通讯波动（同时进入控制状态，时大时小），随机早期检测算法（了解一下）； UDP（可能作为对比来问，无连接，尽力而为，面向报文，无各种控制，一对一，一对多，多对多，首部大小及结构，校验和计算过程（求和，溢出回卷，反码，校验等），可能间插着问问正反补码）； TCP，UDP 伪首部，虚拟的数据结构，参与计算校验和，简单了解； 网络层（主机到主机间的逻辑通信）； IP （感觉其实传输层以下问的不多，能说出来就行了。v4/v6，点分十进制，各类地址空间，DNS，NAT，DHCP，路由寻址，EGP（BGP 看一下留个印象），IGP（RIP，OSPF 留个印象））； ICMP（知道类型 0 和类型 8 报文是啥（Echo 响应与请求），ping 的流程）； ARP（地址解析协议，了解一下流程什么的）； MAC（介质访问控制协议，简单了解一下）； 关系数据库（实际上主要指 MySQL） 范式，背下来吧； 基本 sql 语法（这个我真记的不咋行，因为平时用也都是要查查的）； 数据结构（B 树，B+ 树，插入分裂，删除合并等，结合 MySQL InnoDB，结合聚簇索引，B+ 树的好处（B+ 树方便遍历，内容在叶子所以效率稳定，IO 吞吐更大开销低））； 索引 哈希索引（InnoDB 自适应）； 聚簇索引/非聚簇索引； 主键索引/唯一索引/二级索引； 单列索引/联合索引； 覆盖索引； 最左匹配，查询回表等； 索引优缺点（加快检索速度，加快多表连接，额外空间开销，维护索引的额外时间开销）； 适合不适合建立索引的字段等； 索引无法使用的情况（模糊匹配，OR 前后没有同时使用，联合索引的最左匹配等）； 事务（集中式） 事务的基本概念，事务的提交，回滚等； ACID特性； 事务的并发问题（第一二类丢失更新，脏读，不可重复读，幻读）； 隔离级别（读未提交，读已提交，可重复读，串行化）； 事务的支持，InnoDB； 数据库锁 锁的概念和大类别（悲观并发控制，乐观并发控制，MVCC 等）； 数据库锁的类别（主要是悲观锁，表锁/叶锁/行锁，意向锁，共享锁/排它锁，更新锁，记录锁/间隙锁/Next-Key锁等）； InnoDB，索引加锁，行锁的使用（比较执行代价），行锁死锁（所以行锁复杂），意向锁（解决行表锁冲突），行锁（记录/间隙/Next-Key），更新锁（避免先S后X的死锁）等； 锁时效性（临时锁，持续锁）； 加锁协议（一/二/三级加锁协议，二段锁协议（充分条件），一次封锁法等）； MVCC 的概念，时间戳版本号，快照版本与当前版本，适用场景等。 NOSQL（主要指 Redis，本人仅限于有限的使用和了解） 基本数据类型； 部分支持事务，单线程（串行，无锁）等； 淘汰策略（六种，可能挑出来 LRU 问）； 持久化问题（RDB 快照与 AOF 操作日志）； zset 的数据结构（跳表，了解一下）； 消息队列（不是 Redis 的设计目标）。 基础数据结构 数组，链表，树，堆，队列，栈，图，都看一看概念，别到时候卡壳，结合语言； BST，AVL，红黑都了解一下。DFS，BFS 结合回溯法和分支法。图感觉我们搬砖的用的也不多，看看最短路径之类的； 基础算法方面 时间/空间复杂度的含义，基本二分，变种二分，基本排序以及它们的各种特点，六大基础算法类型等； 小心动规。。。 其他 进程与线程（可以结合语言说）； 死锁等； 分布式数据库事务，CAP，BASE，二次提交协议等； 正则表达式，简单了解一下； 设计模式，简单了解一下； 面向对象概念，特点，原则； 各种工具的使用，如 Git，Maven等； Linux 的基本使用； IO模型（同步/异步，阻塞/非阻塞），BIO，NIO，AIO，IO多路复用等； 反向代理，负载均衡，微服务架构的注册和管理，多节点缓存，CDN 内容分发网络，DNS 轮询等，可能结合具体的工具说，如 Nginx，ZooKeeper 等； Twitter雪花算法了解一下； 海量请求问题，海量数据问题； Java 相关（非 Java 的同学简单参考下） 有时间的把《Java 编程思想》，《Java 核心技术 卷 I》，《深入理解 Java 虚拟机》翻一下； 基础知识，如重载重写，继承多态，关键字等，记清楚； Java 数组，容器集合包/类，常用容器，以及相应静态工具包/类，HashMap 底层（红黑树警告），ConcurrentHashMap 原理等（1.8前后变化，分段锁变成 CAS 了）； IO/NIO 包，主要结合 IO 模型说（实际上 IO 包已经用 NIO 包重新实现过了）； 并发（包），Java 关键字，锁等 Thread，Runnable，Callable，Future，ThreadLocal 等，会用，知道区别； 线程池体系，ExecutorService，ScheduledExecutorService 等接口，ThreadPoolExecutor，ForkJoinPool 等实现类，Executors 静态工厂类，线程池的核心参数，几种不同类型的工厂线程池等，会用，了解一下； 几种常用的阻塞队列，这里很大可能会让写个简单的阻塞队列（生产者消费者），参考下 ArrayBlockingQueue 里面的，用 ReentrantLock 和 Condition 简单写一下就好了； 几种并发构件，倒计时栅栏，循环栅栏这些，说实话我不常用，简单了解下吧； synchronized 关键字，首先知道它是干啥的，其次了解咋实现的，我认为至少要讲到 monitor 面试官才会满意，其间可能牵扯到堆中对象头结构（这里还可能牵扯到数组的 length 属性咋来的），还可能牵扯到锁优化（偏向锁，自旋锁，轻量级锁，锁粗化，锁消除（这里还可能牵扯到对象逃逸等），对象头的 Mark Word 复用等）； Lock，主要是 ReentrantLock，要了解 AQS 的基本工作原理，包括同步队列和 Condition 的等待队列等（和 monitor 的队列很像），了解它的 states 状态是用 CAS 算法更新的，了解公平/非公平，了解自旋/挂起； 了解 CAS 的基本原理，知道 Java 中的 Unsafe 类（知道用这个东西就行了，直接操作内存的，基本用不到）； 原子类，信号量，了解一下； 了解经典的进程线程模型（内核线程，轻量级线程，用户线程等），了解 Java 的线程调度策略（抢占式，系统决定），了解 Java 线程优先级（不一一对应，程序不应该依赖于优先级）； 了解 JMM，了解可见性问题（由此引出 volatile 关键字），知道 volatile 能解决可见性（区别于原子性）和重排序问题，由此引出有序性的先行发生原则（happens-before）。 JVM 运行时内存区域（虚拟机栈，本地方法栈，程序计数器，堆，方法区（1.8前后变化，永久代被元空间替代了）等，了解栈和堆的区别（小细节：非逃逸对象的栈上分配），了解线程私有区域和共享区域等（比如一个怪问题，布尔值所占的空间大小））； 垃圾回收算法，引用计数法，可达性分析法（引出强软弱虚四种引用），两次标记（引出 finalize 方法），标记清除（碎片，CMS），标记复制（Eden，Survivor，分配担保，新生代），标记整理（老年代），分代，GC 停顿，Stop The World（砸瓦鲁多），安全点/区域等； 垃圾回收器（七个，记一下特点）； JVM 对象分配回收策略（Eden 优先，大对象直接进老年代，长期存活进老年代，动态年龄判定等）； 类加载器（Bootstrap，Extension，Application 以及自定义的），双亲委派（能否破坏，loadClass 方法），加载流程（加载，验证，准备，解析，初始化），加载时候生成方法区对应的类的数据结构，以及生成对应的 class 对象（小细节问题：数组没有对应的类，怎么生成的），准备过程（分配类变量空间，赋值后延到初始化），初始化过程（结合 Java 新建对象各部分执行顺序分析）； class 对象引出反射，引出代理（Java 代理和 CGLib，了解一下）； 框架（主要指 Spring）了解一下，IOC 和 AOP 的概念与原理，感觉框架问的并不多（实际上 Java 问的就很少）。 总结总的来说差不多就是这样，可能有遗漏。 说起来面试，其实也有一定的运气成分在。 本人没有什么面试经验，字节这次算是第一次正经面试（想想也是够野的），而且还在实习，复习时间少的可怜，感觉很多地方都答的一般。 本来我都没敢投（听说太菜会被记录），想先拿其他的试试，结果 OPPO 把我简历挂了，一气之下就投了，也是塞翁失马，焉知非福啊。 所以，人，一定要有梦想！ 愿各位八月能斩获佳绩，与诸君共勉。]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>
-        <category>复习</category>
+        <category>面经</category>
+      </categories>
+      <tags>
+        <tag>秋招</tag>
+        <tag>面经</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[归并排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[归并排序也是分治法的一个典型应用，相比于快排在分割时做处理（左右两部分相对于基数），归并排序是先分割，然后在集成时有序的归并。 复习索引 描述首先让元素两两排序，这时得到若干个有序的二元组（假设是偶数个，这个不影响）； 然后让两个二元组合并，同时排序，这时得到若干个有序的四元组； 重复上述过程，直到最后得到有序的 n 元组，排序完成。 归并排序也是先天的契合递归。 时间复杂度：都是 O(nlogn)。 空间复杂度：O(n)。 稳定性：稳定。 代码递归版本： 12345678910111213141516171819202122232425262728293031323334public class MergeSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; helper(array, new int[array.length], 0, array.length - 1); &#125; public void helper(int[] array, int[] result, int s, int e) &#123; if (s == e) &#123; return; &#125; int m = (e - s) / 2 + s; int s1 = s; int e1 = m; int s2 = m + 1; int e2 = e; helper(array, result, s1, e1); helper(array, result, s2, e2); int k = s; while (s1 &lt;= e1 &amp;&amp; s2 &lt;= e2) &#123; result[k++] = array[s1] &lt; array[s2] ? array[s1++] : array[s2++]; &#125; while (s1 &lt;= e1) &#123; result[k++] = array[s1++]; &#125; while (s2 &lt;= e2) &#123; result[k++] = array[s2++]; &#125; for (int i = s; i &lt; e; i++) &#123; array[i] = result[i]; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>归并排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：快速排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
-    <content type="text"><![CDATA[快速排序是典型的分治法应用，它挑选一个基数，把数列分为比基数小和比基数大的两部分，然后对每个部分分别再应用上述处理，这种形式先天的契合递归。 复习索引 描述这里假设使用原地分割方法，选择第一个元素作为基数。设置左右两个索引 l 和 r。 先比较 a[r] 和基数，如果 a[r] 大，r 左移，否则交换； 然后比较 a[l] 与基数，如果 a[l] 小，l 右移，否则交换； 重复上述过程，直到 l 遇到 r，这时该位置为基数，基数左边都比它小，右边都比它大； 对两边递归处理； 当递归入参序列的长度小于2时，即为递归出口。 时间复杂度：平均 O(nlogn)，最好 O(nlogn)，最坏 O(n ^ 2)。 空间复杂度：O(logn) ~ O(n)，递归会产生栈空间开销。 稳定性：不稳定。 代码递归版本： 1234567891011121314151617181920212223242526272829public class QuickSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; helper(array, 0, array.length - 1); &#125; public void helper(int[] array, int s, int e) &#123; if (s &gt;= e) &#123; return; &#125; int l = s; int r = e; int k = array[s]; while (l &lt; r) &#123; for (; array[r] &gt; k; r--) &#123; &#125; array[l] = array[r]; array[r] = k; for (; array[l] &lt; k; l++) &#123; &#125; array[r] = array[l]; array[l] = k; &#125; helper(array, s, l - 1); helper(array, r + 1, e); &#125;&#125;]]></content>
+    <title><![CDATA[快速排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[快速排序是典型的分治法应用，它挑选一个基数，把数列分为比基数小和比基数大的两部分，然后对每个部分分别再应用上述处理，这种形式先天的契合递归。 复习索引 描述这里假设使用原地分割方法，选择中间元素作为基数。设置左右两个索引 l 和 r。 先比较 a[l] 和基数，如果 a[l] 小，l 右移； 然后比较 a[r] 与基数，如果 a[r] 大，r 左移； 如果当前 l 仍然小于 r，则交换，并移动指针。否则，l 右移一位退出； 重复上述过程直到结束，这时基数左边都比它小，右边都比它大； 对两边递归处理； 当递归入参序列的长度小于2时，即为递归出口。 时间复杂度：平均 O(nlogn)，最好 O(nlogn)，最坏 O(n ^ 2)。 空间复杂度：O(logn) ~ O(n)，递归会产生栈空间开销。 稳定性：不稳定。 代码递归版本： 123456789101112131415161718192021222324252627282930313233343536public class QuickSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; helper(array, 0, array.length - 1); &#125; private void helper(int[] array, int s, int e) &#123; if (s &gt;= e) &#123; return; &#125; int l = s; int r = e; int k = array[(s + e) / 2]; while (l &lt;= r) &#123; while (array[l] &lt; k) &#123; l++; &#125; while (array[r] &gt; k) &#123; r--; &#125; if (l &lt; r) &#123; int temp = array[l]; array[l] = array[r]; array[r] = temp; l++; r--; &#125; else if (l == r) &#123; l++; &#125; &#125; helper(array, s, r); helper(array, l, e); &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>快速排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：希尔排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%2F</url>
+    <title><![CDATA[希尔排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[希尔排序也称递减增量排序算法，是插入排序的一种更高效的改进版本，它是非稳定排序算法。 复习索引 描述希尔排序是基于插入排序的以下两点性质而提出改进方法的： 插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率； 插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位（后移一位）。 因此希尔排序将数据按照步长分成几个区域来执行插入排序（这样数据可以前进一大步而不是一位），然后逐渐减小步长，当步长较小的时候，数据已经近乎有序了（这时插入排序效率高）。 简单的步长可以选择为数组大小的一般，然后每次取对半，直到步长为1。 还有更好的步长选择，这里不展开。 时间复杂度：平均介于 O(nlogn) 与 O(n ^ 2) 之间，最好 O(n ^ 1.3)，最差 O(n ^ 2)。 空间复杂度：O(1)。 稳定性：不稳定。 代码123456789101112131415161718192021222324public class ShellSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; int num = array.length / 2; int cur; int j; while (num &gt;= 1) &#123; for (int i = num; i &lt; array.length; i++) &#123; cur = array[i]; for (j = i - num; j &gt;= 0; j -= num) &#123; if (array[j] &gt; cur) &#123; array[j + num] = array[j]; &#125; else &#123; break; &#125; &#125; array[j + num] = cur; &#125; num /= 2; &#125; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>希尔排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：插入排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%2F</url>
+    <title><![CDATA[插入排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[插入排序的思想是，对于当前元素，在已经排序的数列中找它的位置，然后插入进去。 复习索引 描述对已排序部分从后往前扫描，大于当前元素的后移一位，小于或等于的话，把当前元素查到这个元素的后一位。 假设当前有一个数组{5, 6, 8, 7, 4}，568是已排序部分，当前元素是7，这时对568从后开始扫描。 8大于7，8后移，这时这四个位置是5688； 6小于7，把7插入到6后面的位置，这时四个位置是5678； 这样这四个元素就排好了，继续对后面的元素排序。 时间复杂度：平均情况O(n ^ 2)，最好 O(n)，最坏 O(n ^ 2)。 空间复杂度：O(1)。 稳定性：稳定。 代码1234567891011121314151617181920public class InsertionSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; int cur; int j; for (int i = 1; i &lt; array.length; i++) &#123; cur = array[i]; for (j = i - 1; j &gt;= 0; j--) &#123; if (array[j] &gt; cur) &#123; array[j + 1] = array[j]; &#125; else &#123; break; &#125; &#125; array[j + 1] = cur; &#125; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>插入排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：选择排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%2F</url>
+    <title><![CDATA[选择排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[也是最简单的排序算法之一，和冒泡排序做交换不同的是，选择排序每次从序列里找最大（小）值，然后和最后（前）的元素做交换。 复习索引 描述假设每次找最小的元素。 遍历一趟，记录下来最小元素的索引，和最前面的元素做交换。 然后忽略已经排好的部分，对剩下的继续上面的过程。 时间复杂度：都是 O(n ^ 2)。 空间复杂度：O(1)。 稳定性：稳定。 代码12345678910111213141516171819202122public class SelectionSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; int index; int temp; for (int i = 0; i &lt; array.length; i++) &#123; index = i; for (int j = i + 1; j &lt; array.length; j++) &#123; if (array[j] &lt; array[index]) &#123; index = j; &#125; &#125; if (index != i) &#123; temp = array[i]; array[i] = array[index]; array[index] = temp; &#125; &#125; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>选择排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：冒泡排序]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%2F</url>
+    <title><![CDATA[冒泡排序]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[最简单的排序算法之一，冒泡是对其流程的一种形象比喻，越小（大）的元素会经由交换慢慢“浮”到数列的一端。 复习索引 描述假设使较大的元素“上浮”到数列后端。 在一趟遍历中，一次比较两个元素，如果前面的比较大，就和后面的交换，这样遍历完一次，当前最大的元素就到了最后端。 这时忽略后面已经上浮的元素，对前面的部分再次进行上面的流程。 时间复杂度：平均 O(n^2)，最好 O(n)，最差 O(n^2)。 空间复杂度：O(1)。 稳定性：稳定。 代码这里使小元素上浮到前端。 1234567891011121314151617public class BubbleSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; int temp; for (int i = 0; i &lt; array.length; i++) &#123; for (int j = array.length - 1; j &gt; i; j--) &#123; if (array[j] &lt; array[j - 1]) &#123; temp = array[j]; array[j] = array[j - 1]; array[j - 1] = temp; &#125; &#125; &#125; &#125;&#125; 改进思路：设置标志位，如果没有发生交换，则说明排序已经完成，可以直接结束。 12345678910111213141516171819202122public class BubbleSort &#123; public void sort(int[] array) &#123; if (null == array || array.length &lt; 2) &#123; return; &#125; boolean changed = true; int temp; int len = array.length - 1; while (changed) &#123; changed = false; for (int i = 0; i &lt; len; i++) &#123; if (array[i] &gt; array[i + 1]) &#123; temp = array[i]; array[i] = array[i + 1]; array[i + 1] = temp; changed = true; &#125; &#125; len--; &#125; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>基础算法</category>
         <category>排序算法</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>排序</tag>
         <tag>sort</tag>
         <tag>冒泡排序</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：剑指Offer P05 用两个栈实现队列]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P05-%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%2F</url>
+    <title><![CDATA[剑指Offer P05 用两个栈实现队列]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-P05-%E7%94%A8%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%2F</url>
     <content type="text"><![CDATA[剑指Offer P05 用两个栈实现队列 复习索引 剑指Offer 索引 题目描述用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。 思路push 和 pop 两个方法，从哪个着手都可以，我是对 push 做了处理。 当压入新元素时，压入到栈的底部即可。 可以在压入前把栈 A 的元素压入栈 B，压入后再转移回来，这样新元素就在栈底了。 代码已通过验证。 1234567891011121314151617181920import java.util.Stack;public class Solution &#123; Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;(); Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;(); public void push(int node) &#123; while (!stack1.empty()) &#123; stack2.push(stack1.pop()); &#125; stack1.push(node); while (!stack2.empty()) &#123; stack1.push(stack2.pop()); &#125; &#125; public int pop() &#123; return stack1.pop(); &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[秋招复习：剑指Offer P04 重建二叉树]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P04-%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-P04-%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[剑指Offer P04 重建二叉树 复习索引 剑指Offer 索引 题目描述输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。 思路讲到 DFS 十有八九就递归。 考虑先序遍历特点，先是根节点值，再是左子树部分，再是右子树部分； 考虑中序遍历特点，先是左子树部分，再是根节点值，再是右子树部分； 再加上题目提示，不存在重复值。 那么基本过程就出来了，根据先序的第一个值，在中序里找，中序能分割出来左右子树的部分（以及长度），再根据长度去先序里分割。把左右子树各个部分传进方法里递归处理。 代码已通过验证。 1234567891011121314151617181920212223242526272829303132333435363738394041/** * Definition for binary tree * public class TreeNode &#123; * int val; * TreeNode left; * TreeNode right; * TreeNode(int x) &#123; val = x; &#125; * &#125; */public class Solution &#123; public TreeNode reConstructBinaryTree(int [] pre,int [] in) &#123; if (null == pre || null == in || pre.length != in.length) &#123; return null; &#125; return helper(pre, 0, pre.length - 1, in, 0, in.length - 1); &#125; private TreeNode helper(int[] pre, int ps, int pe, int[] in, int is, int ie) &#123; if (ps &gt; pe) &#123; return null; &#125; TreeNode node = new TreeNode(pre[ps]); if (ps == pe) &#123; return node; &#125; int index = -1; for (int i = is; i &lt;= ie; i++) &#123; if (in[i] == pre[ps]) &#123; index = i; break; &#125; &#125; if (index &lt; 0) &#123; return node; &#125; int len = index - is; node.left = helper(pre, ps + 1, ps + len, in, is, index - 1); node.right = helper(pre, ps + len + 1, pe, in, index + 1, ie); return node; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：剑指Offer P03 从尾到头打印链表]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P03-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8%2F</url>
+    <title><![CDATA[剑指Offer P03 从尾到头打印链表]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-P03-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[剑指Offer P03 从尾到头打印链表 复习索引 剑指Offer 索引 题目描述输入一个链表，按链表值从尾到头的顺序返回一个ArrayList。 思路其实就是要求头插入，但是题目很坏的要求返回 ArrayList。 ArrayList 基于数组实现，头插开销很大，所以考虑使用辅助容器。 这个形式明显是栈比较好，先入后出，所以可以用栈结构。 这里我用了 LinkedList。 代码已通过验证。 123456789101112131415161718192021222324252627import java.util.ArrayList;import java.util.LinkedList;/*** public class ListNode &#123;* int val;* ListNode next = null;** ListNode(int val) &#123;* this.val = val;* &#125;* &#125;**/import java.util.ArrayList;public class Solution &#123; public ArrayList&lt;Integer&gt; printListFromTailToHead(ListNode listNode) &#123; LinkedList&lt;Integer&gt; temp = new LinkedList&lt;&gt;(); while (null != listNode) &#123; temp.push(listNode.val); listNode = listNode.next; &#125; ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(temp.size()); list.addAll(temp); return list; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：剑指Offer P02 替换空格]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P02-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%2F</url>
+    <title><![CDATA[剑指Offer P02 替换空格]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-P02-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC%2F</url>
     <content type="text"><![CDATA[剑指Offer P02 替换空格 复习索引 剑指Offer 索引 题目描述请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。 思路不考虑 Java API 方法。 看了别人的写法，主要是第一次正序遍历查空格数，计算新的长度；第二遍后续遍历，正常字符后移即可，空格就逐字符插入目标字符串。后序插入好处是显而易见的，不像正序那样，每次插入都要把后面的后移。 但是题目也没说不能用额外空间，我就写了个简单的方法。 代码已通过验证。 12345678910111213141516public class Solution &#123; public String replaceSpace(StringBuffer str) &#123; if (null == str) &#123; return null; &#125; StringBuilder sb = new StringBuilder(str.length()); for (int i = 0; i &lt; str.length(); i++) &#123; if (' ' == str.charAt(i)) &#123; sb.append("%20"); &#125; else &#123; sb.append(str.charAt(i)); &#125; &#125; return sb.toString(); &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：剑指Offer P01 二维数组中的查找]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-P01-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%2F</url>
+    <title><![CDATA[剑指Offer P01 二维数组中的查找]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-P01-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE%2F</url>
     <content type="text"><![CDATA[剑指Offer P01 二维数组中的查找 复习索引 剑指Offer 索引 题目描述在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 思路注意，它说的是每行每列都“单独”递增，不是整个二维表连起来都递增，这个是容易想歪的地方。 简单思路是直接遍历，时间 O(n * m)； 还可以用二分法，对每行二分，然后逐列找，时间 O(nlogm)； 更好的方法是通过二维上的一种剪枝。 从左下角或右上角的元素开始，这个元素能把二维表分为三个部分：比它小的；比它大的；未知的； 以左下角为例，该元素当前列上全比他小，当前行上全比他大，其余未知。 这时判断它和目标大小，目标比较小则剪去这一行，行索引上移；目标比较大则剪去这一列，列索引右移；相同则返回。 然后到了下一个元素，继续上述过程。 最差情况是找完了也没找到，走了 m + n 步，所以时间是线性的。 代码第三种方法，已通过验证。 1234567891011121314151617181920212223public class Solution &#123; public boolean Find(int target, int [][] array) &#123; if (null == array) &#123; return false; &#125; int i = array.length - 1; int j = 0; while (i &gt; -1) &#123; if (null == array[i] || j &gt;= array[i].length) &#123; i--; continue; &#125; if (array[i][j] == target) &#123; return true; &#125; else if (array[i][j] &lt; target) &#123; j++; &#125; else &#123; i--; &#125; &#125; return false; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
         <category>剑指Offer</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：剑指Offer 索引]]></title>
-    <url>%2F2019%2F07%2F14%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%89%91%E6%8C%87Offer-%E7%B4%A2%E5%BC%95%2F</url>
+    <title><![CDATA[剑指Offer 索引]]></title>
+    <url>%2F2019%2F07%2F14%2F%E5%89%91%E6%8C%87Offer-%E7%B4%A2%E5%BC%95%2F</url>
     <content type="text"><![CDATA[剑指Offer 编程题思路笔记索引。 复习索引 二维数组中的查找 替换空格 从尾到头打印链表 重建二叉树 用两个栈实现队列]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
-        <category>其他</category>
-        <category>牛客</category>
+        <category>题目</category>
+        <category>算法编程题</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
+        <tag>题目</tag>
+        <tag>算法编程题</tag>
         <tag>剑指Offer</tag>
-        <tag>编程题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：UDP]]></title>
-    <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AUDP%2F</url>
+    <title><![CDATA[UDP]]></title>
+    <url>%2F2019%2F07%2F11%2FUDP%2F</url>
     <content type="text"><![CDATA[用户数据报协议（UDP）工作于传输层，是一个简单的面向数据报的通信协议。 UDP 仅在 IP协议上增加了简单功能，即多路复用与分解，差错校验等。 复习索引 主要特点 无连接； 尽力而为的交付； 面向报文； UDP 仅把上层报文加首部交付给 IP，本身并不会合并拆分，这就需要应用选择合适的报文大小，否则会降低效率。 没有拥塞控制； 支持一对一，一对多，多对多； 首部仅8字节。 主要优点 快； 简单； 没有连接开销； 报文的首部开销小。 报文结构 校验和校验和可以用于发现头部信息和数据中的传输错误。 在IPv4中是可选的，在IPv6中则是强制的。如果不使用校验和，该字段应被填充为全0。 UDP 校验和有16位，使用方式： 发送方对所有16比特字求和（溢出需要回卷），再取反码，作为校验和； 接收方对所有16比特字求和，二进制结果应为全1（原码加反码），以此来判断是否正确。 校验和计算时包括整个报文段（不含自身）以及伪首部，若为奇数个字节，则补充一个全零字节。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>计算机网络</category>
         <category>协议栈</category>
         <category>传输层</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>UDP</tag>
         <tag>用户数据报协议</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：数据库 事务]]></title>
-    <url>%2F2019%2F07%2F11%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BA%8B%E5%8A%A1%2F</url>
+    <title><![CDATA[数据库 事务]]></title>
+    <url>%2F2019%2F07%2F11%2F%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BA%8B%E5%8A%A1%2F</url>
     <content type="text"><![CDATA[在数据库系统中，一个事务（transaction）是指，由一系列数据库操作组成的一个完整的逻辑过程。它是并发控制的基本单位，其操作要么全部执行，要么全部不执行，是一个不可分割的工作单位。 复习索引 执行流程 ACID特性为了保证事务的可靠，DBMS 必须具备四个特性，即 ACID。 原子性（Atomicity）：一个事务的所有操作，要么全部完成，要么全部不完成，如果成功则提交，如果失败则回滚。即事务不可分割，不可约简； 一致性（Consistency）：事务的执行需要确保数据库从一个一致状态转变为另一个一致状态，一致性的含义是数据库中的数据满足完整性约束。即事务开启前和结束后，数据库的完整性不能被破坏，写入的资料必须完全符合所有的预设约束，触发器，级联回滚等； 隔离性（Isolation）：数据库允许多个并发事务同时对数据进行读写与修改，隔离性可以防止多个事务并发执行时由于交叉执行而导致的数据不一致。隔离具有不同的级别，参照隔离级别； 持久性（Durability）：事务处理结束之后，对数据的修改需要是永久的。 并发问题并发执行事务会产生一些问题，参考并发控制机制。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>数据库</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
-        <tag>数据结构</tag>
+        <tag>数据库</tag>
         <tag>事务</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：ping]]></title>
-    <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9Aping%2F</url>
+    <title><![CDATA[ping]]></title>
+    <url>%2F2019%2F07%2F10%2Fping%2F</url>
     <content type="text"><![CDATA[ping 是最著名的ICMP应用，主要用来探测主机到主机之间是否可以通信。 ping 使用了 ICMP 类型8 Echo Request（回显请求）和类型0 Echo Reply（回显响应）作为探测与应答的报文。 复习索引 ICMP ping 过程 ping应用 会构建一个固定格式的 ICMP 请求数据包； Linux 下除了8字节报头，会填充报文至总大小64字节； Windows下除8字节报头，会填充报文至总大小40字节。 数据包与目标 IP 交给 IP 协议封装； 根据目标 IP，由 ARP 协议获取目标的 MAC 地址； 同网段，可查询到目标 MAC并发送； 异网段，此请求被发给网关，由网关转发（ARP 解析流程）。 目标受到 Echo 请求报文，返回 Echo 应答报文； 本地收到应答（或无应答失败），根据时间与成功响应次数估算出丢包率与数据往返时延（RTT）。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>计算机网络</category>
         <category>协议栈</category>
         <category>网络层</category>
         <category>ICMP</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>ping</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：ICMP 协议]]></title>
-    <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AICMP-%E5%8D%8F%E8%AE%AE%2F</url>
+    <title><![CDATA[ICMP 协议]]></title>
+    <url>%2F2019%2F07%2F10%2FICMP-%E5%8D%8F%E8%AE%AE%2F</url>
     <content type="text"><![CDATA[ICMP，互联网控制消息（报文）协议，位于网络层，用于在网际协议中发送控制消息。 ICMP 依靠 IP 来完成任务，根据 IP 的版本不同，也分为 v4 和 v6 版本。 ICMP 协议的著名应用是： ping traceroute 复习索引 报文结构ICMP 包含在 IP 数据包中，因此 IP 报头在 ICMP 报头的前面（IP 首部一般20字节）。 ICMP 报头为8字节，当 IP 首部中协议字段为1时，说明是个 ICMP 报文。 其中，类型和代码（各1字节）共同定义了 ICMP 报文的详细类型。 标识符标识了本 ICMP 进程，仅适用于 Echo Reply报文使用。 序列号也是在 Echo Reply报文中使用。 主要类型： 类型 0：Echo Reply（回显响应）； 类型 8：Echo Request（回显请求）； 类型 13：时间戳请求； 类型 14：时间戳应答； 类型 3：目标不可达； 类型 4：源端关闭； 类型 11：超时。 填充内容 Linux ping 工具一般填充使得总报文大小为64字节； Windows ping 工具一般填充使得总报文大小为40字节。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>计算机网络</category>
         <category>协议栈</category>
         <category>网络层</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
         <tag>ICMP</tag>
         <tag>互联网控制消息协议</tag>
-        <tag>临阵磨枪</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：Java 重写与重载比较]]></title>
-    <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AJava-%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E8%BD%BD%E6%AF%94%E8%BE%83%2F</url>
+    <title><![CDATA[Java 重写与重载比较]]></title>
+    <url>%2F2019%2F07%2F10%2FJava-%E9%87%8D%E5%86%99%E4%B8%8E%E9%87%8D%E8%BD%BD%E6%AF%94%E8%BE%83%2F</url>
     <content type="text"><![CDATA[区别点 - 重写 重载 方法名 相同 相同 参数列表 相同 必须不同 返回类型 协变返回类型 可以不同 异常声明 不能更广泛 可以不同 访问修饰符 不能更低 可以不同 非访问修饰符 部分可变 可变 性质 动态分派（绑定） 静态分派（绑定） 体现 动态多态性 静态多态性 复习索引 Override 重写 Overload 重载]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>语言</category>
         <category>Java</category>
         <category>基础知识</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重写</tag>
         <tag>重载</tag>
@@ -341,42 +270,32 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：Java-重载]]></title>
-    <url>%2F2019%2F07%2F10%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AJava-%E9%87%8D%E8%BD%BD%2F</url>
+    <title><![CDATA[Java-重载]]></title>
+    <url>%2F2019%2F07%2F10%2FJava-%E9%87%8D%E8%BD%BD%2F</url>
     <content type="text"><![CDATA[重载是类中方法静态多态性的体现，属于静态分派（绑定）的典型应用，对象静态类型在编译期已经可以确定，并在运行期保持不变。 1234567891011121314151617181920212223242526272829303132public class Test &#123; public static void main(String[] args) &#123; A a = new B(); Number n = new Integer(1); a.f(n); B b = (B) a; b.f(n); Integer i = (Integer) n; a.f(i); &#125;&#125;class A &#123; static void f(Number a) &#123; System.out.println("static A Number"); &#125; void f(Integer a) &#123; System.out.println("A Integer"); &#125;&#125;class B extends A &#123; static void f(Number a) &#123; System.out.println("static B Number"); &#125;&#125;output --&gt;static A Numberstatic B NumberA Integer 复习索引 Override 重写 重写与重载的比较 Overload 重载 重载方法的方法名不变，参数列表必须改变。 方法头：修饰符，返回值类型，方法名，参数列表； 方法签名：方法名，参数列表； 参数列表：形参类型，顺序，数目。 每一个重载的方法（或者构造函数）都必须有独一无二的参数列表； 重载方法可以修改返回类型； 重载方法可以修改修饰符； 重载方法可以进行更广泛的受查异常声明； 方法可以在同一个类或者子类中被重载； 特别地，无法以返回类型作为区分重载方法的标准。 假如两个方法只有返回类型不同，那么如果调用者忽略返回值，将无法判断调用哪个重载方法。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>语言</category>
         <category>Java</category>
         <category>基础知识</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重载</tag>
         <tag>Overload</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：Java 重写]]></title>
-    <url>%2F2019%2F07%2F09%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9AJava-%E9%87%8D%E5%86%99%2F</url>
+    <title><![CDATA[Java 重写]]></title>
+    <url>%2F2019%2F07%2F09%2FJava-%E9%87%8D%E5%86%99%2F</url>
     <content type="text"><![CDATA[重写（覆写）是指子类对父类的允许访问的方法的实现过程进行重新编写，这是 Java 继承体系下动态多态性的体现，是动态分派（绑定）的典型应用，对象实际类型在运行时才能确定，编译期并不知晓。 重写的好处是，子类可以根据自身的需要，重写实现父类的方法。 12345678910111213141516171819202122public class Test &#123; public static void main(String[] args) &#123; A a = new B(); a.f(); &#125;&#125;class A &#123; void f() &#123; System.out.println("A"); &#125;&#125;class B extends A &#123; @Override void f() &#123; System.out.println("B"); &#125;&#125;output --&gt;B 复习索引 Overload 重载 重写与重载的比较 Override 重写 / 覆写 父类的成员方法仅能被它的子类重写； 必须先继承一个方法，才能重写它； 被重写方法的方法名与重写后的方法名必须完全相同（废话）； 被重写方法的参数列表（参数顺序、类型与个数）与重写后的必须完全相同，但不包括参数名； 12345678910class A &#123; void f(int a, float b, double c) &#123; &#125;&#125;class B extends A &#123; @Override void f(int d, float e, double f) &#123; &#125;&#125; 重写方法时，访问权限修饰符的权限不能比之前更低（相同或更高），比如 protected 修饰，重写后不能为 private 或者 default权限。 因为使用父类引用时，必须保证能访问子类对象重写的方法，如果子类重写方法权限降低，那么可能导致有些父类引用无法调用方法； 123456789101112131415161718class A &#123; protected void f() &#123; &#125;&#125;class B extends A &#123; @Override public void f() &#123; // OK &#125;&#125;class C extends A &#123; @Override void f() &#123; // 默认权限，编译错误。 &#125;&#125; 关于重写方法的返回类型，在早期 Java 版本中必须相同，在 Java7 以及更高版本中可以使用协变返回类型，即为原本的类型或者原本类型的派生类，需要能够相容。 因为返回类型如果不相容，会导致此方法的调用者出现问题。 例如某方法返回 Number 类型，返回值被赋给了一个 Number 引用。当覆写时修改返回类型为 Integer，可以相容；但如果返回类型改为 String，就无法相容，String 对象无法赋予 Number 引用； 123456789101112131415161718192021class A &#123; protected Number f() &#123; return null; &#125;&#125;class B extends A &#123; @Override protected Integer f() &#123; return null; // OK &#125;&#125;class C extends A &#123; @Override protected String f() &#123; return null; // 编译错误，类型不相容。 &#125;&#125; 关于重写方法抛出的异常，重写方法可以抛出任何非受查异常，不受限制；而受查异常，重写方法仅能抛出原本声明的异常，或者范围更窄化的异常，这点和返回类型的策略相似。 调用者根据父类方法声明的异常决定处理策略（捕获或者上抛等），如果重写方法声明了更广泛的异常，将会导致该受查异常的处理被遗漏，这是不被允许的。 未抛出异常可以认为是最窄化的异常声明，所以如果父类方法抛出异常，子类重写完全可以不抛出； 123456789101112131415161718192021class A &#123; protected Number f() throws IOException &#123; return null; &#125;&#125;class B extends A &#123; @Override protected Number f() throws Exception &#123; // 编译错误，抛出异常更广泛了。 return null; &#125;&#125;class C extends A &#123; @Override protected Number f() &#123; // OK return null; &#125;&#125; 区别于依赖隐式参数的实际类型进行的动态绑定（多态），private 方法、static 方法、final 方法以及构造函数属于静态绑定，它们不能被重写。 private 方法不被继承，不能重写，但可以重新声明（从内存角度考虑，父类的一切都会被继承，但是这里使用官方文档的说法）； static 方法严格来说属于类，能够继承，不能重写，但可以重新声明（此时原静态方法被隐藏），重新声明时 static 修饰符不可移除（移除的话相当于重写了）； final 修饰方法的含义就是不能被重写，但能够继承，不存在重新声明的行为； 构造函数不能被重写。]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>语言</category>
         <category>Java</category>
         <category>基础知识</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>Java</tag>
         <tag>重写</tag>
         <tag>Override</tag>
@@ -384,19 +303,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[秋招复习：数组]]></title>
-    <url>%2F2019%2F07%2F08%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E6%95%B0%E7%BB%84%2F</url>
+    <title><![CDATA[数组]]></title>
+    <url>%2F2019%2F07%2F08%2F%E6%95%B0%E7%BB%84%2F</url>
     <content type="text"><![CDATA[数组是由相同类型的元素组成的数据结构，分配一块连续的内存来存储，利用元素下标索引来计算对应的储存地址，几乎所有语言都支持数组。 复习索引 Java 中的数组Java 数组的本质是对象数组实例毫无疑问是对象，它可以访问 length 属性，可以调用继承自 Object 的方法。 但数组是一种特殊的类型，没有 class 文件，API 中没有对应的类，它是由 JVM 从元素类型合成出来的。 length 属性，在 JVM 中通过 arraylength 专用字节码指令访问。 数组的父类所用数组类型继承自 Object，同时，如果 B 继承自 A，则 B 的数组类型继承自 A 的数组类型。 这一点和容器不同，比如，ArrayList&lt;Number&gt; 与 ArrayList&lt;Integer&gt; 没有继承关系。 12345678910111213public class Test &#123; public static void main(String[] args) &#123; Integer[] a = new Integer[1]; System.out.println(a.getClass().getSuperclass().getName()); System.out.println(a instanceof Integer[]); System.out.println(a instanceof Number[]); &#125;&#125;output --&gt;java.lang.Objecttruetrue Java 类仅允许有一个父类，但是 getSuperclass 方法却返回了 Object，这是因为： JDK1.8 Java API public Class&lt;? super T&gt; getSuperclass() Returns the Class representing the superclass of the entity (class, interface, primitive type or void) represented by this Class. If this Class represents either the Object class, an interface, a primitive type, or void, then null is returned. If this object represents an array class then the Class object representing the Object class is returned. 如果对象是数组类型，该方法将返回 Object 对应的 Class 对象。 数组类型全名1234567891011121314151617181920212223242526public class Test &#123; public static void main(String[] args) &#123; System.out.printf("%-20s%30s\n", boolean[].class.getName(), boolean[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", byte[].class.getName(), byte[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", char[].class.getName(), char[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", short[].class.getName(), short[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", int[].class.getName(), int[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", long[].class.getName(), long[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", float[].class.getName(), float[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", double[].class.getName(), double[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", String[].class.getName(), String[].class.getCanonicalName()); System.out.printf("%-20s%30s\n", int[][][].class.getName(), int[][][].class.getCanonicalName()); &#125;&#125;output --&gt;[Z boolean[][B byte[][C char[][S short[][I int[][J long[][F float[][D double[][Ljava.lang.String; java.lang.String[][[[I int[][][] 数组特点 效率：Java 中效率最高的存储与随机访问对象引用序列的方式； 基本类型：数组可以直接持有基本类型； 定长：快速与高效的代价是数组的大小被固定。 内存中的数组数组标识符（变量）只是引用，位于栈中，它指向一个在堆中创建的实际对象，该对象用以保存指向其他对象（元素）的引用。 若元素是基本类型，则保存的是基本类型的值。 数组声明标准声明方式： 12int[] a1;int[][] a2; 但下面的形式都正确，不建议使用前三种形式，这是源自C的习惯。 1234int a1[][][]; // 1int[] a2[][]; // 2int[][] a3[]; // 3int[][][] a4; // 4 数组创建 使用 new 创建； 1int[] a = new int[1]; 使用 Array.newInstance() 静态方法，动态创建与使用数组。 12345678910public class Test &#123; public static void main(String[] args) &#123; Object array = Array.newInstance(String.class, 1); Array.set(array, 0, "abc"); System.out.println(Array.get(array, 0)); &#125;&#125;output --&gt;abc 数组初始化 静态初始化：指定初始值，系统决定数组长度。 12String[] array1 = new String[]&#123;"a", "b", "c"&#125;;String[] array2 = &#123;"a", "b", "c"&#125;; 动态初始化：指定数组大小，系统初始化默认值。 1String[] array = new String[3]; 两种方式不可同时使用。 系统初始化默认值为： 基本类型：0所对应的值，整形为0，浮点为0.0，布尔为 false，字符为空（BLANK NULL，ASCII 码编号0字符）； 引用类型：null。 初始化后，数组在内存空间中的大小固定，不可再改变。 多维数组Java 中没有多维数组，只有一维数组。或者说，所谓 Java 多维数组其实是数组的数组。 比如，三维数组中的元素其实是二维数组的引用。 因此，多维数组动态初始化时只需要指定第一维度的大小。 而且，多维数组可以为不规则（不定长）数组。 1234567public class Test &#123; public static void main(String[] args) &#123; int[][] a = new int[2][]; a[0] = new int[3]; a[1] = new int[4]; &#125;&#125; 通常，除了处理数学问题，所使用的数组最好不要超过三维。 数组大小指定Java 中数组的大小可用常量，变量，表达式等指定（需要能转换为正整数）。 而 C/C++ 只能使用常量。 数组下标Java 数组下标索引由0开始，使用 array[index] 来访问对应元素。 12int[] array = new int[1];array[0] = 9527; 入参与返回值数组是引用类型，理所当然地，可以和其他对象一样，作为入参和返回值。 泛型数组与泛型不能很好地结合。 不能实例化具有参数化类型的数组； 不允许直接创建泛型数组，但可以使用类型擦除机制与转型来获得。 1234567891011public class Test &#123; void f1() &#123; List&lt;String&gt;[] array1; // 可以声明 List&lt;String&gt;[] array2 = new List&lt;String&gt;[1]; // 不可创建，此句编译错误 &#125; &lt;T&gt; void f2() &#123; T[] array1 = new T[1]; // 不可创建，此句编译错误 T[] array2 = (T[]) new Object[1]; // 可以转型 &#125;&#125; 若要使用泛型，尽量避免使用数组，而是使用容器替代。 常见异常 数组索引超出边界； 12345678910public class Test &#123; public static void main(String[] args) &#123; int[] a = new int[1]; a[1] = 1; &#125;&#125;output --&gt;Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 1 at Test.main(Test.java:15) 指定数组大小为负数； 123456789public class Test &#123; public static void main(String[] args) &#123; int[] a = new int[-1]; &#125;&#125;output --&gt;Exception in thread "main" java.lang.NegativeArraySizeException at Test.main(Test.java:14) 数组大小超出虚拟机限制。 123456789public class Test &#123; public static void main(String[] args) &#123; int[] a = new int[Integer.MAX_VALUE]; &#125;&#125;output --&gt;Exception in thread "main" java.lang.OutOfMemoryError: Requested array size exceeds VM limit at Test.main(Test.java:14) 静态工具类 java.lang.reflect.Array：提供动态创建与访问数组的静态方法； java.util.Arrays：提供操作数组的静态实用工具方法。 其中，Arrays.asList 方法为连接数组与容器的桥梁之一；Arrays.sort 方法是一种改进后的快速排序。 数组拷贝方法 for 循环，灵活，但效率低； 继承的 clone 方法，native 原生方法，已经被覆写，浅层拷贝； Arrays.copyOf 方法，该方法实际使用了 System.arraycopy 方法，浅层拷贝； System.arraycopy 方法，native 原生方法，效率最高，浅层拷贝。 For-Each Loopfor-each 循环可适用于数组，但是其会丢掉索引信息。 12345678public class Test &#123; public static void main(String[] args) &#123; int[] a = new int[10]; for (int item : a) &#123; // do something &#125; &#125;&#125;]]></content>
       <categories>
-        <category>经历</category>
-        <category>秋招</category>
-        <category>复习</category>
+        <category>知识</category>
         <category>数据结构</category>
       </categories>
       <tags>
-        <tag>秋招</tag>
-        <tag>复习</tag>
-        <tag>临阵磨枪</tag>
         <tag>数据结构</tag>
         <tag>数组</tag>
       </tags>
@@ -404,7 +318,7 @@
   <entry>
     <title><![CDATA[秋招复习：内容索引]]></title>
     <url>%2F2019%2F07%2F07%2F%E7%A7%8B%E6%8B%9B%E5%A4%8D%E4%B9%A0%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B4%A2%E5%BC%95%2F</url>
-    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 插入 希尔 快速 归并 堆 计数 桶 基数 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 多路复用与分解，端口 伪首部 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 牛客 剑指Offer 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 2 3 4 5]]></content>
+    <content type="text"><![CDATA[秋招复习知识点索引梳理，个人视角，研发方向，Java主导。 君はCodingが本当に上手~ 数据结构 数组 链表 树 二叉检索树（BST） 二叉平衡树（AVL） 红黑树 B 树，B+ 树 堆 队列 栈 图 深度优先搜索（DFS） 广度优先搜索（BFS） 最小生成树算法 迪杰斯特拉单源最短路径算法（Dijkstra） 弗洛伊德多源最短路径算法（Floyd） 基础算法 二分查找，二分变种 排序算法 冒泡 选择 插入 希尔 快速 归并 堆 计数 桶 基数 穷举法 分治法 动态规划 贪心算法 回溯法，DFS 分支限界，BFS 复杂度分析 计算机网络 TCP/IP 协议栈，OSI 七层模型 应用层 HTTP，HTTPS DNS Socks（会话层，介于应用层与传输层） 传输层 TCP UDP 多路复用与分解，端口 伪首部 网络层 IP（v6） ICMP ping 数据链路层 ARP BIO，NIO，AIO 数据库 索引 SQL 语法 引擎 事务，ACID 特性 并发控制机制 数据库锁机制 加锁协议 隔离级别 优化 MySQL Redis 操作系统 进程，线程，协程，进程通讯，线程通讯 OS 策略，页面置换，进程调度 死锁 虚拟内存 Linux，内核 语言 Java 基础知识 Override 重写 Overload 重载 重写与重载的比较 继承 异常 泛型 集合 反射，代理 并发、多线程 IO，NIO 网络编程 Java Web JVM 内存模型，机制 垃圾回收（器），GC 算法 内存分配与回收策略 内存泄漏，内存溢出 类文件结构与类加载机制 线程，锁，安全 调优 JDK API，源码 HTML JavaScript 扩展 分布式 大数据 微服务 机器学习 设计模式 规范，协议，工具，框架，库 Git Maven Gradle Jenkins Nginx Apache Tomcat Docker AMQP RabbitMQ Spring JUnit MyBatis Hibernate REST 其他 LeetCode 剑指Offer 海量数据问题 琐碎知识记录 通用基础知识 正则表达式 原码，反码，补码 实例问题 从输入URL到页面加载完成，中间发生了什么。 设计一个ID生成器（Twitter Snowflake 雪花算法）。 3 4 5]]></content>
       <categories>
         <category>经历</category>
         <category>秋招</category>
